@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Add Customer</title>
+	<!-- Bootstrap CSS -->
+	<link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <style>
+        .container {
+            display: flex;
+        }
+        aside {
+            flex: 0 0 250px; /* Điều chỉnh chiều rộng của thanh aside */
+            background-color: #fff;
+            padding: 2rem;
+            height: 100vh;
+            position: fixed;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        aside .toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        aside .toggle .logo {
+            display: flex;
+            align-items: center;
+        }
+        aside .toggle .logo img {
+            width: 40px;
+            margin-right: 10px;
+        }
+        aside .toggle .logo h2 {
+            font-size: 1.5rem;
+        }
+        aside .sidebar {
+            margin-top: 2rem;
+        }
+        aside .sidebar a {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        aside .sidebar a span {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+        aside .sidebar a h3 {
+            margin: 0;
+            font-size: 1rem;
+        }
+        aside .sidebar a.active,
+        aside .sidebar a:hover {
+            background-color: #ddd;
+            border-radius: 5px;
+        }
+        main {
+            flex: 1;
+            margin-left: 270px; /* Đảm bảo main có khoảng cách với aside */
+            padding: 2rem;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .form-control {
+            margin-bottom: 10px;
+        }
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="toggle">
+                <a href="/home">
+                    <div class="logo">
+					    <img th:src="@{/images/home/logo.png}">
+					    <h2>YT<span class="danger">Sport</span></h2>
+					</div>
+                </a>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="/admin/index" class="active">
+                    <span class="material-icons-sharp">dashboard</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="/admin/managercustomer">
+                    <span class="material-icons-sharp">person_outline</span>
+                    <h3>Customers</h3>
+                </a>
+                <a href="/admin/managerproduct">
+                    <span class="material-icons-sharp">receipt_long</span>
+                    <h3>Products</h3>
+                </a>
+                <a href="/admin/managercategory">
+                    <span class="material-icons-sharp">category</span>
+                    <h3>Categories</h3>
+                </a>
+                <a href="/admin/orderwait">
+                    <span class="material-icons-sharp">assignment</span>
+                    <h3>Orders</h3>
+                </a>
+                <a href="/admin/favorites" >
+                    <span class="material-icons-sharp">favorite
+                    </span>
+                    <h3>Favorite</h3>
+                </a>
+                </a> <a href="/admin/managerstatis"> <span
+					class="material-icons-sharp"> <svg
+							xmlns="http://www.w3.org/2000/svg" height="24px"
+							viewBox="0 -960 960 960" width="24px" fill="#434343">
+				<path
+								d="M120-120v-80l80-80v160h-80Zm160 0v-240l80-80v320h-80Zm160 0v-320l80 81v239h-80Zm160 0v-239l80-80v319h-80Zm160
+ 0v-400l80-80v480h-80ZM120-327v-113l280-280 160 160 280-280v113L560-447 400-607 120-327Z" /></svg>
+				</span>
+					<h3>Revenue Statistics</h3>
+				</a>
+                <a href="${pageContext.request.contextPath}/auth/logout">
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+        <main>
+	    <div class="form-container">
+	        <h2 class="text-center">Add Customer</h2>
+	        <div th:if="${not #strings.isEmpty(message)}" class="alert alert-success" th:text="${message}"></div>
+	        <div th:if="${not #strings.isEmpty(error)}" class="alert alert-danger" th:text="${error}"></div>
+	        <!-- Thêm bảng thông báo lỗi -->
+	        <form th:action="@{/admin/savecustomer}" th:object="${customer}" method="post" enctype="multipart/form-data">
+	            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+	                <strong>Errors:</strong>
+	                <ul>
+	                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}" class="text-danger"></li>
+	                </ul>
+	            </div>
+	            <div class="mb-3">
+	                <label for="name" class="form-label">Customer Name:</label>
+	                <input type="text" id="name" th:field="*{name}" class="form-control" required>
+	                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></div>
+	            </div>
+	            <div class="mb-3">
+	                <label for="email" class="form-label">Email:</label>
+	                <input type="email" id="email" th:field="*{email}" class="form-control" required>
+	                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>
+	            </div>
+	            <div class="mb-3">
+	                <label for="password" class="form-label">Password:</label>
+	                <input type="password" id="password" th:field="*{password}" class="form-control" required>
+	                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></div>
+	            </div>
+	            <div class="mb-3">
+	                <label for="phone" class="form-label">Phone:</label>
+	                <input type="text" id="phone" th:field="*{phone}" class="form-control" required>
+	                <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="text-danger"></div>
+	            </div>
+	            <div class="mb-3">
+	                <label for="address" class="form-label">Address:</label>
+	                <input type="text" id="address" th:field="*{address}" class="form-control">
+	                <div th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="text-danger"></div>
+	            </div>
+	            <button type="submit" class="btn btn-primary w-100">Save</button>
+	        </form>
+	    </div>
+	</main>
+
+    </div>
+    <!-- Bootstrap Bundle with Popper -->
+	<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js}"></script>
+	<!-- jQuery -->
+	<script th:src="@{https://code.jquery.com/jquery-3.5.1.js}"></script>
+	<!-- DataTables JS -->
+	<script type="text/javascript" charset="utf8" th:src="@{https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js}"></script>
+	<script>
+	    $(document).ready(function() {
+	        $('#productTable').DataTable();
+	    });
+	</script>
+	<script th:src="@{https://kit.fontawesome.com/fd1177a423.js}" crossorigin="anonymous"></script>
+	<script th:src="@{/views/admin/index.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home | YT-Sport</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/css/prettyPhoto.css}" rel="stylesheet">
+    <link th:href="@{/css/price-range.css}" rel="stylesheet">
+    <link th:href="@{/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <link th:href="@{/css/responsive.css}" rel="stylesheet">
+    
+    <link rel="shortcut icon" th:href="@{/images/ico/favicon.ico}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" th:href="@{/images/ico/apple-touch-icon-144-precomposed.png}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" th:href="@{/images/ico/apple-touch-icon-114-precomposed.png}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" th:href="@{/images/ico/apple-touch-icon-72-precomposed.png}">
+    <link rel="apple-touch-icon-precomposed" th:href="@{/images/ico/apple-touch-icon-57-precomposed.png}">
+</head>
+<!--/head-->
+
+<body>
+	 <header id="header">
+		<!--header-->
+		<div class="header_top">
+			<!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href="#"><i class="fa fa-phone"></i> +84
+										4973902</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="https://www.facebook.com/tong.phu.125"><i
+										class="fa fa-facebook"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/header_top-->
+
+		<div class="header-middle">
+			<!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-1">
+						<div class="logo pull-left">
+							<a href="/home"><img src="/images/home/logo.png" alt=""
+								style="height: 50px; width: 50px;" /></a>
+						</div>
+
+					</div>
+					<div class="col-sm-11">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								<li th:if="${not #strings.isEmpty(session.customer)}"
+									class="dropdown"><a href="#" class="dropdown-toggle"
+									data-toggle="dropdown"> <i class="fa fa-user"></i> <span
+										th:text="${session.customer.name}"></span> <b class="caret"></b>
+								</a>
+									<ul class="dropdown-menu" style="background-color: #803D3B">
+										<li><a th:href="@{/auth/changepassword}">Đổi mật khẩu</a></li>
+										<li><a th:href="@{/auth/updateprofile}">Cập nhật
+												thông tin</a></li>
+										<li><a th:href="@{/auth/logout}">Đăng xuất</a></li>
+									</ul></li>
+								<li
+									th:if="${not #strings.isEmpty(session.customer) and session.customer.admin}">
+									<a th:href="@{/shop}"><i class="fa fa-list"></i> Sản phẩm</a>
+								</li>
+								<li
+									th:if="${not #strings.isEmpty(session.customer) and session.customer.admin}">
+									<a th:href="@{/favorites/views}"><i class="fa fa-heart"></i>Yêu
+										Thích</a>
+								</li>
+								<li
+									th:if="${not #strings.isEmpty(session.customer) and session.customer.admin}">
+									<a th:href="@{/admin/index}"><i class="fa fa-lock"></i>
+										Admin</a>
+								</li>
+								<li
+									th:if="${not #strings.isEmpty(session.customer) and !session.customer.admin}">
+									<a th:href="@{/shop}"><i class="fa fa-list"></i> Sản phẩm</a>
+								</li>
+								<li
+									th:if="${not #strings.isEmpty(session.customer) and !session.customer.admin}">
+									<a th:href="@{/favorites/views}"><i class="fa fa-heart"></i>Yêu
+										Thích</a>
+								</li>
+								<li
+									th:if="${not #strings.isEmpty(session.customer) and !session.customer.admin}">
+									<a th:href="@{/order/history}"><i
+										class="fa fa-shopping-cart"></i>Quản lý đơn hàng</a>
+								</li>
+								<li th:if="${#strings.isEmpty(session.customer)}"><a
+									href="#" class="dropdown-toggle" data-toggle="dropdown"> <i
+										class="fa fa-user"></i>Tài khoản <b class="caret"></b>
+								</a>
+									<ul class="dropdown-menu" style="background-color: #803D3B">
+										<li><a th:href="@{/auth/login}">Đăng nhập</a></li>
+										<li><a th:href="@{/auth/register}">Đăng kí</a></li>
+										<li><a th:href="@{/auth/forgotpassword}">Quên mật
+												khẩu</a></li>
+									</ul></li>
+								<li><a th:href="@{/shop}"><i class="fa fa-list"></i>
+										Sản phẩm</a></li>
+								<li><a th:href="@{/contactus}"><i class="fa fa-star"></i>
+										Liên hệ</a></li>
+								<li><a th:href="@{/cart/views}"><i
+										class="fa fa-shopping-cart"></i>Giỏ Hàng</a></li>
+							</ul>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/header-middle-->
+	</header>
+    <!--/header-->
+    
+	<section id="advertisement">
+       
+    </section>
+
+	<section  style="margin-bottom: 20px">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Giỏ Hàng</li>
+            </ol>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3>Chi tiết giỏ hàng </h3>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Tổng tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                         <tr th:each="item : ${cartItems}">
+				            <th scope="row" th:text="${item.cart_item_id}"></th>
+				            <td th:text="${item.product.name}"></td>
+				            <td th:text="${item.quantity}"></td>
+				            <td th:text="${#numbers.formatCurrency(item.product.price)}"></td>
+				            <td th:text="${#numbers.formatCurrency(item.product.price * item.quantity)}"></td>
+				        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+					<div class="col-md-6">
+					
+					</div>
+					<div class="col-md-6">
+						<form id="paymentForm" method="post" action="/order/pay">
+						  <div class="mb-3">
+						    <label for="exampleFormControlInput1" class="form-label">Tổng tiền: <span th:text="${#numbers.formatCurrency(total)}"></span></label>
+						  </div>
+						
+						  <div class="mb-3">
+						    <label for="exampleFormControlInput1" class="form-label">Phương thức thanh toán</label>
+						    <div class="form-check">
+						      <input checked class="form-check-input" type="radio" name="payMethod" value="1" id="cashOnDelivery">
+						      <label class="form-check-label" for="cashOnDelivery">
+						        Thanh toán khi nhận hàng
+						      </label>
+						    </div>
+						    <div class="form-check">
+						      <input class="form-check-input" type="radio" name="payMethod" id="vnpay" value="2">
+						      <label class="form-check-label" for="vnpay">
+						        Thanh toán VNPay
+						      </label>
+						    </div>
+						  </div>
+						
+						  <button type="submit" class="btn btn-primary">Thanh toán</button>
+						</form>
+
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</section>
+	<!--/#cart_items-->
+
+
+	<!--/#do_action-->
+
+	<footer id="footer">
+        <!--Footer-->
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="companyinfo">
+                            <h2><span>YTSport</span>Store</h2>
+                            <p>YT Sport là địa chỉ uy tín chuyên cung cấp đa dạng các mẫu giày dép thời trang, chất lượng cao, cập nhật xu hướng mới nhất. Với giá cả hợp lí, cạnh tranh cùng đội ngũ nhân viên chuyên nghiệp, nhiệt tình, YT Sport luôn mang đến cho khách hàng sự hài lòng tuyệt đối.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="col-sm-3">
+                            <div class="video-gallery text-center">
+                                <a href="#">
+                                    <div class="iframe-img">
+                                        <img src="/images/home/iframe1.png" alt="" />
+                                    </div>
+                                    <div class="overlay-icon">
+                                        <i class="fa fa-play-circle-o"></i>
+                                    </div>
+                                </a>
+                                <p>Circle of Hands</p>
+                                <h2>24 DEC 2014</h2>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="video-gallery text-center">
+                                <a href="#">
+                                    <div class="iframe-img">
+                                        <img src="/images/home/iframe2.png" alt="" />
+                                    </div>
+                                    <div class="overlay-icon">
+                                        <i class="fa fa-play-circle-o"></i>
+                                    </div>
+                                </a>
+                                <p>Circle of Hands</p>
+                                <h2>24 DEC 2014</h2>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="video-gallery text-center">
+                                <a href="#">
+                                    <div class="iframe-img">
+                                        <img src="/images/home/iframe3.png" alt="" />
+                                    </div>
+                                    <div class="overlay-icon">
+                                        <i class="fa fa-play-circle-o"></i>
+                                    </div>
+                                </a>
+                                <p>Circle of Hands</p>
+                                <h2>24 DEC 2014</h2>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="video-gallery text-center">
+                                <a href="#">
+                                    <div class="iframe-img">
+                                        <img src="/images/home/iframe4.png" alt="" />
+                                    </div>
+                                    <div class="overlay-icon">
+                                        <i class="fa fa-play-circle-o"></i>
+                                    </div>
+                                </a>
+                                <p>Circle of Hands</p>
+                                <h2>24 DEC 2014</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="address">
+                            <img src="images/home/map.png" alt="" />
+                            <p>Ninh Kiều - Cần Thơ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-widget">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Dịch vụ</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Hổ Trợ Online</a></li>
+                                <li><a href="#">Liên Hệ</a></li>
+                                <li><a href="#">Trang Thái Đặt Hàng</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Shop</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Giày Thời Trang</a></li>
+                                <li><a href="#">Giày Nam</a></li>
+                                <li><a href="#">Giày Nữ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Chính Sách</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Chính sách người dùng</a></li>
+                                <li><a href="#">Chính sách mua hàng</a></li>
+                                <li><a href="#">Chính sách hoàn tiền</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <p class="pull-left">FPT Polytechnic © 2024, All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+	<script>
+	document.getElementById("paymentForm").addEventListener("submit", function(event) {
+	  // Make sure there are no preventDefault calls here unless needed
+	  // event.preventDefault(); 
+	
+	  // Check if a payment method is selected (optional validation)
+	  const paymentMethod = document.querySelector('input[name="payMethod"]:checked').value;
+	  if (!paymentMethod) {
+	    alert("Please select a payment method.");
+	    event.preventDefault(); // Only prevent default if there is an error
+	  }
+	
+	  // If you have additional validation or actions, handle them here
+	});
+	</script>
+
+	<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.scrollUp.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.prettyPhoto.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+</body>
+</html>

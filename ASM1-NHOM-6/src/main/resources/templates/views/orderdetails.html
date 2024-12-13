@@ -1,0 +1,116 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Order | YT-Sport</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/css/prettyPhoto.css}" rel="stylesheet">
+    <link th:href="@{/css/price-range.css}" rel="stylesheet">
+    <link th:href="@{/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <link th:href="@{/css/responsive.css}" rel="stylesheet">
+    
+    <link rel="shortcut icon" th:href="@{/images/ico/favicon.ico}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" th:href="@{/images/ico/apple-touch-icon-144-precomposed.png}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" th:href="@{/images/ico/apple-touch-icon-114-precomposed.png}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" th:href="@{/images/ico/apple-touch-icon-72-precomposed.png}">
+    <link rel="apple-touch-icon-precomposed" th:href="@{/images/ico/apple-touch-icon-57-precomposed.png}">
+
+</head>
+<title>CHI TIẾT ĐƠN HÀNG</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        .success-icon {
+            font-size: 50px;
+            color: green;
+        }
+        .info {
+            margin: 20px 0;
+            text-align: left;
+        }
+        .info p {
+            margin: 5px 0;
+        }
+        .info p span {
+            font-weight: bold;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #00bfff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="max-width: 700px">
+    <div class="success-icon">✓</div>
+    <h2>CHI TIẾT ĐƠN HÀNG</h2>
+    <div class="info">
+        <!-- Hiển thị thông tin chung của đơn hàng -->
+        <p><span>Mã đơn hàng:</span> <span th:text="${order.orderId}"></span></p>
+        <p><span>Thời gian:</span> <span th:text="${#dates.format(order.orderDate, 'dd/MM/yyyy')}"></span></p>
+        <p><span>Trạng thái thanh toán:</span> <span th:text="${order.status}"></span></p>
+        <p><span>Số tiền:</span> <span th:text="${#numbers.formatCurrency(order.totalAmount)}"></span></p>
+
+        <!-- Hiển thị danh sách sản phẩm trong đơn hàng -->
+        <h3>Danh sách sản phẩm:</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${orderItems}">
+                    <td th:text="${item.product.name}"></td>
+                    <td th:text="${item.quantity}"></td>
+                    <td th:text="${#numbers.formatCurrency(item.price)}"></td>
+                    <td th:text="${#numbers.formatCurrency(item.quantity * item.price)}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p>Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ sớm chuyển hàng tới bạn.</p>
+    <a class="button" th:href="@{/home}">Quay về trang chủ</a>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

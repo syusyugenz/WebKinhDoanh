@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Add Categories</title>
+	<!-- Bootstrap CSS -->
+	<link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <style>
+        .container {
+            display: flex;
+        }
+        aside {
+            flex: 0 0 250px;
+            background-color: #fff;
+            padding: 2rem;
+            height: 100vh;
+            position: fixed;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        main {
+            flex: 1;
+            margin-left: 270px;
+            padding: 2rem;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .form-control {
+            margin-bottom: 10px;
+        }
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="toggle">
+                <a href="/home">
+                    <div class="logo">
+					    <img th:src="@{/images/home/logo.png}">
+					    <h2>YT<span class="danger">Sport</span></h2>
+					</div>
+                </a>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="/admin/index" class="active">
+                    <span class="material-icons-sharp">dashboard</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="/admin/managercustomer">
+                    <span class="material-icons-sharp">person_outline</span>
+                    <h3>Customers</h3>
+                </a>
+                <a href="/admin/managerproduct">
+                    <span class="material-icons-sharp">receipt_long</span>
+                    <h3>Products</h3>
+                </a>
+                <a href="/admin/managercategory">
+                    <span class="material-icons-sharp">category</span>
+                    <h3>Categories</h3>
+                </a>
+                <a href="/admin/orderwait">
+                    <span class="material-icons-sharp">assignment</span>
+                    <h3>Orders</h3>
+                </a>
+                <a href="/admin/favorites" >
+                    <span class="material-icons-sharp">favorite
+                    </span>
+                    <h3>Favorite</h3>
+                </a>
+                </a> <a href="/admin/managerstatis"> <span
+					class="material-icons-sharp"> <svg
+							xmlns="http://www.w3.org/2000/svg" height="24px"
+							viewBox="0 -960 960 960" width="24px" fill="#434343">
+				<path
+								d="M120-120v-80l80-80v160h-80Zm160 0v-240l80-80v320h-80Zm160 0v-320l80 81v239h-80Zm160 0v-239l80-80v319h-80Zm160
+ 0v-400l80-80v480h-80ZM120-327v-113l280-280 160 160 280-280v113L560-447 400-607 120-327Z" /></svg>
+				</span>
+					<h3>Revenue Statistics</h3>
+				</a>
+                <a href="${pageContext.request.contextPath}/auth/logout">
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+        <main>
+		    <div class="form-container">
+		        <h2 class="text-center">Add Category</h2>
+		        <form th:action="@{/admin/savecategory}" method="post">
+		            <div class="mb-3">
+		                <label for="category_name" class="form-label">Category Name:</label>
+		                <input type="text" id="category_name" name="category_name" class="form-control" required>
+		            </div>
+		            <button type="submit" class="btn btn-primary w-100">Save</button>
+		        </form>
+		    </div>
+		</main>
+
+    </div>
+	    <!-- Bootstrap Bundle with Popper -->
+	<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{https://kit.fontawesome.com/fd1177a423.js}" crossorigin="anonymous"></script>
+	<script th:src="@{/js/index.js}"></script>
+
+</body>
+</html>

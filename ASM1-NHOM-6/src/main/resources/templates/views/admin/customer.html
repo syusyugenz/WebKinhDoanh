@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons+Sharp}" rel="stylesheet">
+	<link type="text/css" th:href="@{/css/style.css}" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/path/to/font-awesome/css/font-awesome.min.css}">
+	<!-- DataTables CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css}">
+    <title>Product Management</title>
+    <title>Customer Management</title>
+    <style>
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="toggle">
+               <a href="/home">
+					<div class="logo">
+						<img th:src="@{/images/home/logo.png}" alt="Profile Photo">
+						<h2>
+							YT<span class="danger">Sport</span>
+						</h2>
+					</div>
+				</a>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="/admin/index" class="active">
+                    <span class="material-icons-sharp">dashboard</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="/admin/managercustomer">
+                    <span class="material-icons-sharp">person_outline</span>
+                    <h3>Customers</h3>
+                </a>
+                <a href="/admin/managerproduct">
+                    <span class="material-icons-sharp">receipt_long</span>
+                    <h3>Products</h3>
+                </a>
+                <a href="/admin/managercategory">
+                    <span class="material-icons-sharp">category</span>
+                    <h3>Categories</h3>
+                </a>
+                <a href="/admin/orderwait">
+                    <span class="material-icons-sharp">assignment</span>
+                    <h3>Orders</h3>
+                </a>
+                <a href="/admin/favorites" >
+                    <span class="material-icons-sharp">favorite
+                    </span>
+                    <h3>Favorite</h3>
+                </a>
+                </a> <a href="/admin/managerstatis"> <span
+					class="material-icons-sharp"> <svg
+							xmlns="http://www.w3.org/2000/svg" height="24px"
+							viewBox="0 -960 960 960" width="24px" fill="#434343">
+				<path
+								d="M120-120v-80l80-80v160h-80Zm160 0v-240l80-80v320h-80Zm160 0v-320l80 81v239h-80Zm160 0v-239l80-80v319h-80Zm160
+ 0v-400l80-80v480h-80ZM120-327v-113l280-280 160 160 280-280v113L560-447 400-607 120-327Z" /></svg>
+				</span>
+					<h3>Revenue Statistics</h3>
+				</a>
+                <a href="${pageContext.request.contextPath}/auth/logout">
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+        <main>
+            <h2>Customer Management</h2>
+            	<a th:href="@{/admin/addcustomer}" class="add-btn">Add Customer</a>
+           
+            <div th:if="${message != null}" class="alert" th:class="${alertClass}" th:text="${message}"></div>
+
+            <table id="customerTable" class="data-table">
+               <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Admin</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+         <tbody>
+		    <tr th:each="customer : ${customerPage.content}">
+		        <td th:text="${customer.customer_id}"></td>
+		        <td th:text="${customer.name}"></td>
+		        <td th:text="${customer.email}"></td>
+		        <td th:text="${customer.phone}"></td>
+		        <td th:text="${customer.address}"></td>
+		        <td th:text="${customer.admin}"></td>
+		        <td>
+					  <span th:unless="${customer.admin}">
+					  <a th:if="${customer.enabled}" th:href="@{/admin/lockcustomer/{id}(id=${customer.customer_id})}" class="action-btn lock">Lock</a>
+					  <a th:unless="${customer.enabled}" th:href="@{/admin/unlockcustomer/{id}(id=${customer.customer_id})}" class="action-btn unlock">Unlock</a>
+						</span>
+				</td>
+		    </tr>
+		</tbody>
+
+            </table>
+        </main>
+        <div class="right-section">
+		    <div class="nav">
+		        <button id="menu-btn">
+		            <span class="material-icons-sharp">menu</span>
+		        </button>
+		        <div class="dark-mode">
+		            <span class="material-icons-sharp active">light_mode</span>
+		            <span class="material-icons-sharp">dark_mode</span>
+		        </div>
+		        <div class="profile">
+		            <div class="info">
+		                <p>Hey, <b th:text="${session.customer.name}"></b></p>
+		                <small class="text-muted" th:text="${session.customer.admin} ? 'Admin' : ''"></small>
+		            </div>
+		            <div class="profile-photo">
+		                <img th:src="@{/images/profile-1.jpg}">
+		            </div>
+		        </div>
+		    </div>
+		    <div class="user-profile">
+		        <div class="logo">
+		            <img th:src="@{/images/home/logo.png}">
+		        </div>
+		    </div>
+		</div>
+
+    </div>
+    <!-- jQuery -->
+     <script th:src="@{https://code.jquery.com/jquery-3.5.1.js}"></script>
+	<!-- DataTables JS -->
+	<script type="text/javascript" charset="utf8" th:src="@{https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#customerTable').DataTable();
+        });
+    </script>
+ <script th:src="@{https://kit.fontawesome.com/fd1177a423.js}" crossorigin="anonymous"></script>
+	<script th:src="@{/index.js}"></script>
+
+</html>
